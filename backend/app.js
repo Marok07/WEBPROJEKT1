@@ -11,6 +11,7 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import  'dotenv/config';
 import cors from 'cors';
+//import userController from './controllers/userController.js';
 
 //var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -21,9 +22,9 @@ import termekekRouter from './routes/termekek.js';
 var app = express();
 
 app.use(cors({
-    origin: true,
-    credentials:true
-}));  // Engedélyezés minden domain számára (CORS)
+    origin: true, // Engedélyezi minden domain számára
+    credentials: true // Engedélyezi a hitelesítő adatok küldését Cookie-kel (pl. a refresh token)
+}));  
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,5 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/termekek', termekekRouter);
-
+/*
+const newUser = {
+    'email' : 'banan@alma.hu',
+    'password': 'majom',
+    'name': 'Karsai Márkó',
+    'phone': '06201234567',
+    'profileimage' : ''
+};
+userController.create(newUser)
+*/
 export default app;

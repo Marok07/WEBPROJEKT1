@@ -56,6 +56,7 @@ const UserController = {
                 res.status(404).json({ error: 'Nincs ilyen felhasználó' });
                 return;
             }
+            console.log('User found:',user);
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
                 res.status(401).json({ error: 'Hibás jelszó' });

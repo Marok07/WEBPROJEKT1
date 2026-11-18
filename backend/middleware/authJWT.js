@@ -5,11 +5,10 @@
 import jwt from 'jsonwebtoken';
 
 export function authenticateToken(req, res, next) {
-    /*
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    */
-    const token = req.cookies.accessToken;
+    
+   // const authHeader = req.headers['authorization'];
+   // const token = authHeader && authHeader.split(' ')[1];
+   const token = req.cookies.accessToken; // A token a cookie-ból kerül kiolvasásra
 
     if (!token) {
         return res.status(401).json({ error: 'Nincs hozzáférési token' });
