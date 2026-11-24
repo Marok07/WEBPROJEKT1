@@ -7,7 +7,7 @@ const termekModelMock = {
     create: jest.fn(),
 };
 
-jest.unstable_mockModule("..models/termekModel.js", () => ({
+jest.unstable_mockModule("../models/termekModel.js", () => ({
     default: termekModelMock,
 }));
 
@@ -22,8 +22,13 @@ const createResponse = () => {
 }
 
 test("Sample test case", async () => {
-    expect(true).toBe(true);
-    const resultMock = {};
-    mockedModel.getAll = jest.fn().mockedResolvedValues([{id : 1, nev : "Termék 1", ar : 1000, keszlet : 10}])
-    await TermekController.getAll({ params: {} }, resultMock);
+    //SETUP
+    const products = [{ id: 1 , nev: "Keyboard"}];
+    termekModelMock.getAll.mockResolvedValue(products);
+    const res = createResponse;
+    //ACT
+    const result = await TermekController.getAll({
+        params: {}},res);
+    //ASSERT
+    expect(result).toBeUndefined();
 });
